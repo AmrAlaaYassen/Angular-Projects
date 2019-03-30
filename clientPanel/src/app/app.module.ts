@@ -12,6 +12,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import {FormsModule} from '@angular/forms'
+import { FlashMessagesModule,FlashMessagesService } from 'angular2-flash-messages';
 
 import {AngularFireModule} from '@angular/fire';
 import { AngularFireAuthModule} from '@angular/fire/auth';
@@ -21,10 +23,11 @@ import { AngularFireDatabase } from '@angular/fire/database';
 
 import {ClientService} from './services/client.service';
 const appRoutes : Routes = [
-  {path:'', component:DashboardComponent},
-  {path: 'register', component:RegisterComponent},
-  {path: 'login', component:LoginComponent},
-  {path : 'add-client', component:AddClientComponent}
+  {path :'', component:DashboardComponent},
+  {path : 'register', component:RegisterComponent},
+  {path : 'login', component:LoginComponent},
+  {path : 'add-client', component:AddClientComponent},
+  {path : 'client/:id', component:ClientDetailsComponent }
 ];
 
 
@@ -49,7 +52,8 @@ export const environment = {
     SidebarComponent,
     LoginComponent,
     RegisterComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -58,13 +62,16 @@ export const environment = {
     AngularFirestoreModule, 
     AngularFireAuthModule, 
     AngularFireStorageModule,
+    FormsModule,
+    FlashMessagesModule
   ],
   providers: [
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule,
     AngularFireDatabase,
-    ClientService
+    ClientService,
+    FlashMessagesService
   ],
   bootstrap: [AppComponent]
 })
