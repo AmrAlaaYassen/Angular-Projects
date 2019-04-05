@@ -20,14 +20,15 @@ import { AngularFireAuthModule} from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
-
+import {AuthGuard} from './guards/auth.guard';
 import {ClientService} from './services/client.service';
 const appRoutes : Routes = [
-  {path :'', component:DashboardComponent},
+  {path :'', component:DashboardComponent, canActivate:[AuthGuard]},
   {path : 'register', component:RegisterComponent},
   {path : 'login', component:LoginComponent},
-  {path : 'add-client', component:AddClientComponent},
-  {path : 'client/:id', component:ClientDetailsComponent }
+  {path : 'add-client', component:AddClientComponent, canActivate:[AuthGuard]},
+  {path : 'client/:id', component:ClientDetailsComponent , canActivate:[AuthGuard]},
+  {path : 'edit-client/:id', component:EditClientComponent, canActivate:[AuthGuard]}
 ];
 
 
@@ -71,7 +72,8 @@ export const environment = {
     AngularFireStorageModule,
     AngularFireDatabase,
     ClientService,
-    FlashMessagesService
+    FlashMessagesService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

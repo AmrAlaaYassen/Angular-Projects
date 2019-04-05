@@ -31,4 +31,12 @@ export class ClientService {
   addNewClient(client:Client) {
     this.af.list<Client>('clients').push(client);
   }
+
+  updateClient(id:string, client:Client) { 
+    return this.af.list<Client>('clients').update(id,client);
+  }
+
+  deleteClient(id:string) {
+    return this.af.list<Client>('clients').remove(id);
+  }
 }
